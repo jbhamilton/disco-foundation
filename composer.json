@@ -1,5 +1,5 @@
 {
-        "name": "jbhamilton/disco-foundation",
+        "name": "jbhamilton/disco-foundation-addon",
         "description": "Disco PHP Framework Foundation CSS framework Adapter",
         "license": "Apache License V2",
         "authors": [
@@ -24,7 +24,7 @@
         },
         "extra": {
             "branch-alias":{
-                "dev-master":"1.0-dev"
+                "dev-master":"1.0.x-dev"
             }
         }
 
