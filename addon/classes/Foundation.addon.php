@@ -4,6 +4,17 @@ namespace Disco\addon\Foundation;
 
 class Foundation {
 
+
+    /**
+     *      Create a Magellan Stick Nav From:
+     *          - http://foundation.zurb.com/docs/components/magellan.html
+     *
+     *      @param string $markup the html to process the magellan from
+     *      @param string $pattern the pattern to use to find the nav links to create
+     *      @param string $classes the classes to apply to the magellan sticky nav
+     *      @param string $type the type of sticky nav
+     *      @return array
+    */
     public function magellan($markup,$pattern,$classes='',$type=''){
 
         $t = "
@@ -45,6 +56,15 @@ class Foundation {
     }//magellan
 
 
+
+    /**
+     *      Extract the text of a elements matching a pattern and return them as an array
+     *
+     *      @param string $markup the html to look through
+     *      @param string $pattern the pattern to use to search the html
+     *      @return array $return
+     *
+    */
     public function extract($markup,$pattern){
 
         $doc = \phpQuery::newDocument($markup);
@@ -58,10 +78,49 @@ class Foundation {
 
     }//extract
 
-    public function addClass($markup,$pattern,$class){
 
-        
-    }//addClass
+
+    /**
+     *      Create a Top Bar from:
+     *      - foundation.zurb.com/docs/components/topbar.html
+     *
+     *      @param array $d 
+     *      @return string 
+     *
+    */
+    public function topbar($d){
+
+        $tmp = Array('classes'=>'','name'=>'','left'=>'','right'=>'');
+        foreach($d as $k=>$v){
+            $tmp[$k]=$v;
+        }//foreach
+        $d=$tmp;
+
+        $t = "
+<nav class='top-bar %3\$s' data-topbar> 
+    <ul class='title-area'> 
+        <li class='name'><a href='#'>{$d['name']}</a></li> 
+        <li class='toggle-topbar menu-icon'><a href='#'><span>Menu</span></a></li> 
+    </ul> 
+    <section class='top-bar-section'> 
+            %1\$s
+            %2\$s
+    </section> 
+</nav>
+        ";
+
+        $l = "<ul class='left'>%1\$s</ul>";
+        $r = "<ul class='right'>%1\$s</ul>";
+
+        if($d['left']!='')
+            $l = sprintf($l,$d['left']);
+        if($d['right']!='')
+            $l = sprintf($r,$d['right']);
+
+
+        return sprintf($t,$r,$l,$d['classes']);
+
+    }//topbar
 
 }//Foundation
 
